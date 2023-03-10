@@ -6,7 +6,7 @@ const sequelize = new Sequelize({
     //адрес вашей локальной бд (абсолютный путь)
     storage: "D:\\sstuCumpusLife\\sstuCumpusLife\\src\\db\\sstu.db"
 })
-
+//Добавить валидацию в таблицу
 const students = sequelize.define("students", {
     //айди
     Id: {
@@ -130,6 +130,11 @@ const students = sequelize.define("students", {
             }
         }
     },
+    //фото профиля
+    Photo:{
+        type: DataTypes.BLOB,
+        allowNull: true,
+    },
     //статус (о себе)
     Status:{
         type: DataTypes.STRING,
@@ -142,10 +147,10 @@ const students = sequelize.define("students", {
     },
 })
 
-const createDb = () => {
+const initDataBase = () => {
     sequelize.sync({
         alter: true,
     })
 }
 
-export {createDb, students}
+export {initDataBase, students}

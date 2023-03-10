@@ -1,5 +1,5 @@
 import {NextApiRequest, NextApiResponse} from "next";
-import {createDb} from "@/db/db";
+import {initDataBase} from "@/db/db";
 
 type Data = {
     status: string
@@ -9,6 +9,8 @@ export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse<Data>
 ) {
-    createDb()
-    res.status(200).json({status: "database created and working"})
+    if (req.method == "GET"){
+        await initDataBase()
+        res.status(200).json({status: "database created and working"})
+    }
 }

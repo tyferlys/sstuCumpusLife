@@ -1,3 +1,6 @@
+/*
+добавить потом поле Photo типа BLOB (binary large object)
+ */
 export interface Administrator {
   Id: number
   Login: string
