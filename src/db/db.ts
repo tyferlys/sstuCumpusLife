@@ -3,10 +3,11 @@ import {DataTypes, Sequelize} from "sequelize";
 
 const sequelize = new Sequelize({
     dialect: "sqlite",
-    storage: "./sstu.sqlite"
+    //адрес вашей локальной бд (абсолютный путь)
+    storage: "D:\\sstuCumpusLife\\sstuCumpusLife\\src\\db\\sstu.db"
 })
 
-const users = sequelize.define("users", {
+const students = sequelize.define("students", {
     //айди
     Id: {
         type: DataTypes.INTEGER,
@@ -93,6 +94,13 @@ const users = sequelize.define("users", {
     Role:{
         type: DataTypes.STRING,
         allowNull: false,
+        validate: {
+            customValidator(value: any){
+                if (value != "student"){
+                    throw new Error("Роль может быть только студентом")
+                }
+            }
+        }
     },
     //дата регистрации
     DateRegistration:{
@@ -112,7 +120,7 @@ const users = sequelize.define("users", {
     },
     //курс
     YearStudies:{
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
         allowNull: false,
         validate: {
             customValidator(value: any) {
@@ -140,4 +148,4 @@ const createDb = () => {
     })
 }
 
-export {createDb, users}
+export {createDb, students}

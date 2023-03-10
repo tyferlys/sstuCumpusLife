@@ -23,7 +23,7 @@ export default function Home() {
 
 export async function getStaticProps(){
     const result = await fetch("http://localhost:3000/api/create")
-    console.log(result)
+    //console.log(result)
 
     return {
         props: {
