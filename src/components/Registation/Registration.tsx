@@ -11,10 +11,11 @@ import {Alert} from "@mui/material";
 import Button from "@mui/material/Button";
 import Link from "next/link";
 import {IRegistrationProps} from "@/types/registration";
-import {Controller} from "react-hook-form";
 
 
-const Registration: React.FC<IRegistrationProps> = ({handleSubmit, control, errors}) => {
+const Registration: React.FC<IRegistrationProps> = (
+  {register, handleSubmit,  errors}
+) => {
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline/>
@@ -30,126 +31,88 @@ const Registration: React.FC<IRegistrationProps> = ({handleSubmit, control, erro
           <LockOutlinedIcon/>
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign up
+          Подать заявку на регистрацию
         </Typography>
         <Box component="form" noValidate sx={{mt: 3}} onSubmit={handleSubmit}>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
-              <Controller
-                control={control}
+              <TextField
+                {...register("firstName")}
+                autoComplete="given-name"
                 name="firstName"
-                render={
-                  ({field}) => <TextField
-                    {...field}
-                    autoComplete="given-name"
-                    name="firstName"
-                    required
-                    fullWidth
-                    id="firstName"
-                    label="Имя"
-                    autoFocus
-                  />
-                }
+                required
+                fullWidth
+                id="firstName"
+                label="Имя"
+                autoFocus
               />
+
             </Grid>
             <Grid item xs={12} sm={6}>
-              <Controller
-                control={control}
+              <TextField
+                {...register("lastName")}
+                required
+                fullWidth
+                id="lastName"
+                label="Фамилия"
                 name="lastName"
-                render={
-                  ({field}) => <TextField
-                    {...field}
-                    required
-                    fullWidth
-                    id="lastName"
-                    label="Фамилия"
-                    name="lastName"
-                    autoComplete="family-name"
-                  />
-                }
+                autoComplete="family-name"
               />
+
             </Grid>
             <Grid item xs={12} sm={6}>
-              <Controller
-                control={control}
-                name="studentId"
-                render={
-                  ({field}) => <TextField
-                    {...field}
-                    required
-                    fullWidth
-                    id="lastName"
-                    label="Номер зачетки"
-                    name="lastName"
-                  />
-                }
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <Controller
-                control={control}
-                name="phone"
-                render={
-                  ({field}) => <TextField
-                    {...field}
-                    required
-                    fullWidth
-                    id="phone"
-                    label="Телефон"
-                    name="phone"
-                  />
-                }
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <Controller
-                control={control}
+              <TextField
+                {...register("middleName")}
+                required
+                fullWidth
+                id="middleName"
+                label="Отчество"
                 name="middleName"
-                render={
-                  ({field}) => <TextField
-                    {...field}
-                    required
-                    fullWidth
-                    id="middleName"
-                    label="Отчество"
-                    name="middleName"
-                  />
-                }
+              />
+
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                {...register("studentId")}
+                required
+                fullWidth
+                id="studentId"
+                label="Номер зачетки"
+                name="studentId"
+              />
+
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                {...register("phone")}
+                required
+                fullWidth
+                id="phone"
+                label="Телефон"
+                name="phone"
               />
             </Grid>
             <Grid item xs={12}>
-              <Controller
-                control={control}
+              <TextField
+                {...register("email")}
+                required
+                fullWidth
+                id="email"
+                label="Почта"
                 name="email"
-                render={
-                  ({field}) => <TextField
-                    {...field}
-                    required
-                    fullWidth
-                    id="email"
-                    label="Почта"
-                    name="email"
-                    autoComplete="email"
-                  />
-                }
+                autoComplete="email"
               />
+
             </Grid>
             <Grid item xs={12}>
               <Alert severity="warning">Загрузите свою фотографию напротив экрана регистрации, держа студенческий в
                 руках!</Alert>
             </Grid>
             <Grid item xs={12}>
-              <Controller
-                control={control}
-                name="photo"
-                render={
-                  ({field}) =>
-                    <Button variant="contained" component="label" fullWidth>
-                      Загрузить фотографию
-                      <input {...field} hidden accept="image/*" multiple type="file" required/>
-                    </Button>
-                }
-              />
+              <Button variant="contained" component="label" fullWidth>
+                Загрузить фотографию
+                <input {...register("photo")} hidden type="file"/>
+              </Button>
             </Grid>
           </Grid>
           <Button

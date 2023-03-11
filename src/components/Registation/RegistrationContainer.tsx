@@ -1,19 +1,25 @@
 import React from 'react';
-import {useForm} from "react-hook-form";
+import {SubmitHandler, useForm} from "react-hook-form";
 import Registration from "@/components/Registation/Registration";
-import {IRegistrationFormValues, RegistrationFormDataType, RegistrationFormSchema} from "@/types/registration";
-import {yupResolver} from "@hookform/resolvers/yup";
+import {IRegistrationFormValues} from "@/types/registration";
 
 
 const RegistrationContainer = () => {
-  const {handleSubmit, control, formState: {errors}} = useForm<IRegistrationFormValues>({
-    resolver: yupResolver(RegistrationFormSchema)
-  });
-  const onSubmit = (data: RegistrationFormDataType) => {
-    console.log(data);
+  const {register, handleSubmit, control, formState: {errors}} = useForm<IRegistrationFormValues>();
+  const onSubmit: SubmitHandler<IRegistrationFormValues> = async (data) => {
+    const requestSettings = {
+      method: "POST",
+      body: JSON.stringify(data),
+    }
+    try {
+      await fetch("http://localhost:3000/api/registration/request", requestSettings)
+        .then((res) => console.log(res))
+    } catch (e) {
+      console.log(e)
+    }
   }
   return (
-    <Registration errors={errors} handleSubmit={handleSubmit(onSubmit)} control={control}/>
+    <Registration register={register} errors={errors} handleSubmit={handleSubmit(onSubmit)} control={control}/>
   );
 };
 
