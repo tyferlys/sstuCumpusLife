@@ -17,23 +17,13 @@ const RegistrationContainer = () => {
     formData.append('phone', data.phone)
     formData.append('studentId', String(data.studentId))
     formData.append('lastName', data.lastName)
-    formData.append  ('photo', data.photo[0])
+    formData.append('photo', data.photo[0])
 
 
-    // const file = data.photo[0];
-
-    const requestSettings = {
-      method: "POST",
-      // headers:{
-      //   "Content-Type":"form-data",
-      // },
-      body: formData,
-    }
     try {
       await axios.post("http://localhost:3000/api/registration/request", formData, {
         headers: {
-          'Access-Control-Allow-Origin': '*',
-          'content-type': 'x-www-form-urlencoded',
+          'Content-Type': 'multipart/form-data',
         }
       })
         .then((res) => console.log(res))
@@ -45,5 +35,4 @@ const RegistrationContainer = () => {
     <Registration register={register} errors={errors} handleSubmit={handleSubmit(onSubmit)}/>
   );
 };
-
 export default RegistrationContainer;
