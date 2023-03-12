@@ -21,7 +21,7 @@ export interface IRegistrationFormValues {
 
 
 export interface IRegistrationRequestNextApi extends NextApiRequest {
-  body: string;
+  body: any;
 }
 
 export enum FormDataRegistration {

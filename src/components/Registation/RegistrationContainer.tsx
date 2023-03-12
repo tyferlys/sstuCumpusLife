@@ -2,6 +2,7 @@ import React from 'react';
 import {SubmitHandler, useForm} from "react-hook-form";
 import Registration from "@/components/Registation/Registration";
 import {IRegistrationFormValues} from "@/types/registration";
+import axios from "axios";
 
 
 const RegistrationContainer = () => {
@@ -10,19 +11,31 @@ const RegistrationContainer = () => {
   );
   const onSubmit: SubmitHandler<IRegistrationFormValues> = async (data) => {
     const formData = new FormData()
-    formData.set('middleName', data.middleName)
-    formData.set('firstName', data.firstName)
-    formData.set('email', data.email)
-    formData.set('phone', data.phone)
-    formData.set('studentId', String(data.studentId))
-    formData.set('lastName', data.lastName)
-    formData.set('photo', data.photo[0])
+    formData.append('middleName', data.middleName)
+    formData.append('firstName', data.firstName)
+    formData.append('email', data.email)
+    formData.append('phone', data.phone)
+    formData.append('studentId', String(data.studentId))
+    formData.append('lastName', data.lastName)
+    formData.append  ('photo', data.photo[0])
+
+
+    // const file = data.photo[0];
+
     const requestSettings = {
       method: "POST",
+      // headers:{
+      //   "Content-Type":"form-data",
+      // },
       body: formData,
     }
     try {
-      await fetch("http://localhost:3000/api/registration/request", requestSettings)
+      await axios.post("http://localhost:3000/api/registration/request", formData, {
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'content-type': 'x-www-form-urlencoded',
+        }
+      })
         .then((res) => console.log(res))
     } catch (e) {
       console.log(e)
