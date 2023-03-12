@@ -147,10 +147,83 @@ const students = sequelize.define("students", {
     },
 })
 
+const requeststudents = sequelize.define("requeststudents", {
+    //айди
+    Id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+        allowNull: false,
+    },
+    //имя
+    Name:{
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+            len: {
+                args: [2, 30],
+                msg: "Имя должно быть не менее 2 символов и не более 30"
+            }
+        }
+    },
+    //фамилия
+    Surname:{
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+            len: {
+                args: [2, 30],
+                msg: "Фамилия должна быть не менее 2 символов и не более 30"
+            }
+        }
+    },
+    //отчество
+    MiddleName:{
+        type: DataTypes.STRING,
+        allowNull: true,
+        validate: {
+            len: {
+                args: [2, 30],
+                msg: "Отчество должно быть не менее 2 символов и не более 30"
+            }
+        }
+    },
+    //номер телефона
+    Phone:{
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+            len: {
+                args: [11, 12],
+                msg: "Введите корректный номер: начинается или с +7 или с 8"
+            }
+        }
+    },
+    //почта
+    Mail:{
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+            isEmail: true,
+        }
+    },
+    //номер зачетки
+    StudentId:{
+        type: DataTypes.STRING,
+        unique: true,
+        allowNull: false,
+    },
+    //фото профиля
+    Photo:{
+        type: DataTypes.BLOB,
+        allowNull: false,
+    },
+})
+
 const initDataBase = () => {
     sequelize.sync({
         alter: true,
     })
 }
 
-export {initDataBase, students}
+export {initDataBase, students, requeststudents}

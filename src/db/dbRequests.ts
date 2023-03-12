@@ -1,6 +1,5 @@
-import {students} from "@/db/db";
+import {requeststudents, students} from "@/db/db";
 
-/*
-тут будут функции для работы с моделями по типу студенты администоры и т.д.
-вызываются функции с api
- */
+export const reqStudent = async (student) => {
+    await requeststudents.create(student)
+}
