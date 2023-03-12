@@ -9,9 +9,17 @@ const RegistrationContainer = () => {
     {mode: 'onBlur'}
   );
   const onSubmit: SubmitHandler<IRegistrationFormValues> = async (data) => {
+    const formData = new FormData()
+    formData.set('middleName', data.middleName)
+    formData.set('firstName', data.firstName)
+    formData.set('email', data.email)
+    formData.set('phone', data.phone)
+    formData.set('studentId', String(data.studentId))
+    formData.set('lastName', data.lastName)
+    formData.set('photo', data.photo[0])
     const requestSettings = {
       method: "POST",
-      body: JSON.stringify(data),
+      body: formData,
     }
     try {
       await fetch("http://localhost:3000/api/registration/request", requestSettings)

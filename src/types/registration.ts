@@ -16,10 +16,20 @@ export interface IRegistrationFormValues {
   phone: string;
   middleName: string;
   email: string;
-  photo: File;
+  photo: FileList;
 }
 
 
 export interface IRegistrationRequestNextApi extends NextApiRequest {
-  body: IRegistrationFormValues
+  body: string;
+}
+
+export enum FormDataRegistration {
+  firstName = 'firstName',
+  lastName = 'lastName',
+  studentId = 'studentId',
+  phone = 'phone',
+  middleName = 'middleName',
+  email = 'email',
+  photo = 'photo',
 }

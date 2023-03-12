@@ -142,7 +142,7 @@ const Registration: React.FC<IRegistrationProps> = (
           </Button>
           <Grid container justifyContent="flex-end">
             <Grid item>
-              <Link href="#">
+              <Link href="/login">
                 Уже есть аккаунт? Войти.
               </Link>
             </Grid>
