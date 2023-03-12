@@ -5,7 +5,9 @@ import {IRegistrationFormValues} from "@/types/registration";
 
 
 const RegistrationContainer = () => {
-  const {register, handleSubmit, control, formState: {errors}} = useForm<IRegistrationFormValues>();
+  const {register, handleSubmit, formState: {errors}} = useForm<IRegistrationFormValues>(
+    {mode: 'onBlur'}
+  );
   const onSubmit: SubmitHandler<IRegistrationFormValues> = async (data) => {
     const requestSettings = {
       method: "POST",
@@ -19,7 +21,7 @@ const RegistrationContainer = () => {
     }
   }
   return (
-    <Registration register={register} errors={errors} handleSubmit={handleSubmit(onSubmit)} control={control}/>
+    <Registration register={register} errors={errors} handleSubmit={handleSubmit(onSubmit)}/>
   );
 };
 
