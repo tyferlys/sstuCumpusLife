@@ -1,0 +1,23 @@
+* {
+    box-sizing: border-box;
+    font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+}
+
+.link {
+    color: #0077ff;
+    text-decoration: none;
+    transition: color 0.2s ease-in-out;
+}
+
+.link:hover {
+    color: #0052d6;
+}
+
+.link:active {
+    color: #00a3ff;
+}
+
+.link:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 119, 255, 0.3);
+}
