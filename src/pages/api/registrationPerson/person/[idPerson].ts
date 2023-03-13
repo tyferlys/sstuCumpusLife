@@ -1,6 +1,6 @@
 import {IRegistrationRequestNextApi} from "@/types/registration";
 import {NextApiResponse} from "next";
-import {reqStudentAccept, reqStudentDelete} from "@/db/dbRequests";
+import {reqGetAllStudent, reqStudentAccept, reqStudentDelete} from "@/db/dbRequests";
 
 export default async function handler(
     req: IRegistrationRequestNextApi,
