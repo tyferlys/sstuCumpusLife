@@ -34,7 +34,7 @@ export default async function handler(
 
         res.status(200).json({type:0, text:"Requset student created"})
       }
-      catch (e) {
+      catch (e: any) {
         const error = e.errors[0].message;
 
         switch (error){
