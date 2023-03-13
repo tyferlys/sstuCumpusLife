@@ -10,7 +10,7 @@ const RegistrationPerson = (props: any) => {
 
 export async function getServerSideProps(context: any){
     try{
-        let listStudent = await axios.get("http://localhost:3000/api/registrationPerson/request")
+        let listStudent = await axios.get("http://localhost:3000/api/registrationPerson/1")
             .then((response) => response)
             .catch((error) => error);
 
