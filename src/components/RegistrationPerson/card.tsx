@@ -1,9 +1,20 @@
 import {Avatar, Button, Card, CardActions, CardContent, CardHeader, CardMedia, Collapse, IconButton, Typography} from "@mui/material";
 import {red} from "@mui/material/colors";
+import React from "react";
+import Image from 'next/image'
+
+
 
 const CardStd = (props: any) => {
+
+    sharp(props.student.Phot)
+        .toFile('photo.jpg', (err, info) => {
+            if (err) console.error(err);
+            console.log('Фото успешно создано:', info);
+        });
+
     return (
-        <Card sx={{ minWidth: 275, maxWidth: 275 }}>
+        <Card sx={{ minWidth: 275, maxWidth: 675 }}>
             <CardContent>
                 <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
                     Карточка заявки на регистрацию
@@ -22,6 +33,7 @@ const CardStd = (props: any) => {
                     <br/>
                     Номер телефона - {props.student.Phone}
                 </Typography>
+
             </CardContent>
             <CardActions>
                 <Button size="small">Посмотреть</Button>

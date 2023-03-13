@@ -24,7 +24,6 @@ const RegistrationPerson = (props: any) => {
         }
         else return <Grid item><Alert severity="error">Заявок больше нет!</Alert></Grid>
     }
-
     return (
         <div>
             <Grid
