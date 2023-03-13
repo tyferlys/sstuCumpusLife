@@ -18,13 +18,20 @@ const RegistrationPersonContainer = (props: any) => {
         }
     }
 
+    const acceptStudentRequest = async (idStudent: number) => {
+        await axios.post(`http://localhost:3000/api/registrationPerson/person/${idStudent}`, {
+            idStudent: idStudent,
+        })
+        router.push(`/registrationPerson/${Number(props.pageNow)}`)
+    }
+
     const deleteStudentRequest = async (idStudent: number) => {
         await axios.delete(`http://localhost:3000/api/registrationPerson/person/${idStudent}`)
         router.push(`/registrationPerson/${Number(props.pageNow)}`)
     }
 
     return (
-        <RegistrationPerson listStudent = {props.listStudent} upDateListCard = {upDateListCard} deleteStudentRequest = {deleteStudentRequest}/>
+        <RegistrationPerson listStudent = {props.listStudent} upDateListCard = {upDateListCard} acceptStudentRequest = {acceptStudentRequest} deleteStudentRequest = {deleteStudentRequest}/>
     );
 };
 

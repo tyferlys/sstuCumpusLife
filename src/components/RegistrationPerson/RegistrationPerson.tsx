@@ -17,7 +17,7 @@ const RegistrationPerson = (props: any) => {
             return props.listStudent.map(student => {
                 return (
                     <Grid item key = {key++} mb = {1}>
-                        <CardStd student = {student} deleteStudentRequest = {props.deleteStudentRequest} id={student.Id}/>
+                        <CardStd student = {student} acceptStudentRequest = {props.acceptStudentRequest} deleteStudentRequest = {props.deleteStudentRequest} id={student.Id}/>
                     </Grid>
                 )
             })

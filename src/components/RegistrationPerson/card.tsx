@@ -4,14 +4,7 @@ import React from "react";
 import Image from 'next/image'
 
 
-
 const CardStd = (props: any) => {
-
-    sharp(props.student.Phot)
-        .toFile('photo.jpg', (err, info) => {
-            if (err) console.error(err);
-            console.log('Фото успешно создано:', info);
-        });
 
     return (
         <Card sx={{ minWidth: 275, maxWidth: 675 }}>
@@ -33,10 +26,9 @@ const CardStd = (props: any) => {
                     <br/>
                     Номер телефона - {props.student.Phone}
                 </Typography>
-
             </CardContent>
             <CardActions>
-                <Button size="small">Посмотреть</Button>
+                <Button size="small" onClick={() => {props.acceptStudentRequest(props.student.Id)}}>Принять</Button>
                 <Button size="small" onClick={() => {props.deleteStudentRequest(props.student.Id)}}>Отклонить</Button>
             </CardActions>
         </Card>

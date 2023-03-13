@@ -86,6 +86,7 @@ const students = sequelize.define("students", {
     Mail:{
         type: DataTypes.STRING,
         allowNull: false,
+        unique: true,
         validate: {
             isEmail: true,
         }
@@ -203,6 +204,7 @@ const requeststudents = sequelize.define("requeststudents", {
     Mail:{
         type: DataTypes.STRING,
         allowNull: false,
+        unique: true,
         validate: {
             isEmail: true,
         }
