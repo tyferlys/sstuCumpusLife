@@ -22,7 +22,7 @@ export default async function handler(
       const fileData = fs.readFileSync(files.photo.filepath);
 
       try{
-        await reqStudent({
+        const result = await reqStudent({
           Name: fields.firstName,
           Surname:fields.lastName,
           MiddleName:fields.middleName,
@@ -32,18 +32,18 @@ export default async function handler(
           Photo:fileData,
         })
 
-        res.status(200).json({type:0, text:"Requset student created"})
+        if (result == "почта уже существует"){
+          res.status(400).json({type:0, text:"Почта уже существует"})
+        }
+        else if (result == "номер зачетной книжки уже существует"){
+          res.status(400).json({type:0, text:"номер зачетной книжки уже существуе"})
+        }
+
+        res.status(200).json({type:0, text:"Requeset student created"})
       }
       catch (e: any) {
         const error = e.errors[0].message;
-
-        switch (error){
-          case "StudentId must be unique":
-              res.status(400).json({type:1, text:"StudentId must be unique"})
-            break;
-        }
-
-        res.status(400).json({type:999, text:"Unknown error"})
+        res.status(400).json({type:1, text:error})
       }
     });
   }

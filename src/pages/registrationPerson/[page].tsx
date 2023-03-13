@@ -2,21 +2,23 @@ import React from 'react';
 import RegistrationPersonContainer from "@/components/RegistrationPerson/RegistrationPersonContainer";
 import axios from "axios";
 
-const RegistrationPerson = (props: any) => {
+const Page = (props: any) => {
     return (
-        <RegistrationPersonContainer listStudent = {props.listStudent}/>
+        <RegistrationPersonContainer listStudent = {props.listStudent} pageNow={props.pageNow}/>
     );
 };
 
-export async function getServerSideProps(context: any){
+export async function getServerSideProps({params} : any){
     try{
-        let listStudent = await axios.get("http://localhost:3000/api/registrationPerson/request")
+        let listStudent = await axios.get(`http://localhost:3000/api/registrationPerson/${params.page}`)
             .then((response) => response)
             .catch((error) => error);
-
+        if (listStudent.data.list.length == 0)
+            listStudent.data.list = "заявок больше нет"
         return {
             props: {
                 listStudent: listStudent.data.list,
+                pageNow: params.page,
             }
         }
     }
@@ -30,4 +32,4 @@ export async function getServerSideProps(context: any){
     }
 }
 
-export default RegistrationPerson;
+export default Page;
