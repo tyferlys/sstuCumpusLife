@@ -8,6 +8,9 @@ const CardStd = (props: any) => {
                 <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
                     Карточка заявки на регистрацию
                 </Typography>
+                <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                    №{props.id}
+                </Typography>
                 <Typography variant="h5" component="div">
                     {props.student.Surname} {props.student.Name}
                 </Typography>
@@ -22,7 +25,7 @@ const CardStd = (props: any) => {
             </CardContent>
             <CardActions>
                 <Button size="small">Посмотреть</Button>
-                <Button size="small">Отклонить</Button>
+                <Button size="small" onClick={() => {props.deleteStudentRequest(props.student.Id)}}>Отклонить</Button>
             </CardActions>
         </Card>
     );

@@ -11,3 +11,12 @@ export const reqGetAllStudent = async (offsetDb : number) => {
     })
     return result
 }
+
+export const reqStudentDelete = async (idStudent: number) => {
+    const result = await requeststudents.destroy({
+        where: {
+            id: idStudent
+        }
+    })
+    return result;
+}

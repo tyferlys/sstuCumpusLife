@@ -1,21 +1,20 @@
 import {IRegistrationRequestNextApi} from "@/types/registration";
 import {NextApiResponse} from "next";
-import {reqGetAllStudent} from "@/db/dbRequests";
+import {reqGetAllStudent, reqStudentDelete} from "@/db/dbRequests";
 
 export default async function handler(
     req: IRegistrationRequestNextApi,
     res: NextApiResponse
 ){
-    const offsetDb : number = req.query.page * 3
+    const idStudent = Number(req.query.idPerson);
 
     try{
-        const listStudent = await reqGetAllStudent(offsetDb)
-        res.status(200).json({list: listStudent})
+        const result = await reqStudentDelete(idStudent)
+        console.log(result)
+        res.status(200).json({"status": "deleted"})
     }
-    catch (e) {
+    catch (e){
         console.log(e)
         res.status(500).json({"status": "error"})
     }
-
-
 }

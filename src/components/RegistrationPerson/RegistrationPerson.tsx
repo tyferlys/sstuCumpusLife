@@ -6,11 +6,12 @@ import CardStd from "@/components/RegistrationPerson/card";
 import Grid2 from '@mui/material/Unstable_Grid2';
 import KeyboardArrowDownSharpIcon from '@mui/icons-material/KeyboardArrowDownSharp';
 import KeyboardArrowUpSharpIcon from '@mui/icons-material/KeyboardArrowUpSharp';
+import {useState} from "react";
+import {useRouter} from "next/router";
 const RegistrationPerson = (props: any) => {
 
     let key = 0;
-    const studentList = props.listStudent;
-    console.log(studentList[0])
+
     return (
         <div>
             <Grid
@@ -26,17 +27,17 @@ const RegistrationPerson = (props: any) => {
                     alignItems="center"
                 >
                     <Grid item>
-                        <Button><KeyboardArrowUpSharpIcon fontSize="large"/></Button>
+                        <Button><KeyboardArrowUpSharpIcon fontSize="large" onClick={() => {props.upDateListCard(0)}}/></Button>
                     </Grid>
-                    {studentList.map(student => {
+                    {props.listStudent.map(student => {
                         return (
                             <Grid item key = {key++} item mb = {3}>
-                                <CardStd student = {student} key = {key++}/>
+                                <CardStd student = {student} key = {key++} deleteStudentRequest = {props.deleteStudentRequest} id={key+1}/>
                             </Grid>
                         )
                     })}
                     <Grid item>
-                        <Button><KeyboardArrowDownSharpIcon fontSize="large"/></Button>
+                        <Button><KeyboardArrowDownSharpIcon fontSize="large" onClick={() => {props.upDateListCard(1)}}/></Button>
                     </Grid>
                 </Grid>
 
