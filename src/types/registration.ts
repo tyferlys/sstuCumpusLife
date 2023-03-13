@@ -6,6 +6,9 @@ export interface IRegistrationProps {
   handleSubmit: (e?: BaseSyntheticEvent<object, any, any> | undefined) => void;
   errors: FieldErrors<IRegistrationFormValues>;
   register: UseFormRegister<IRegistrationFormValues>;
+  handleCloseDialog: () => void;
+  isDialogError: boolean;
+  isDialogOpen: boolean;
 }
 
 

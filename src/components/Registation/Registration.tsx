@@ -17,10 +17,18 @@ import {
   nameOptions, phoneOptions, photoOptions,
   studentIdOptions
 } from "@/components/Registation/registrationValidationSettings";
+import AlertDialog from "@/components/InfoDialog/AlertDialog";
 
 
 const Registration: React.FC<IRegistrationProps> = (
-  {register, handleSubmit, errors}
+  {
+    register,
+    handleSubmit,
+    errors,
+    isDialogOpen,
+    isDialogError,
+    handleCloseDialog
+  }
 ) => {
   return (
     <Container component="main" maxWidth="xs">
@@ -149,6 +157,12 @@ const Registration: React.FC<IRegistrationProps> = (
           </Grid>
         </Box>
       </Box>
+      <AlertDialog
+        isError={isDialogError}
+        title={isDialogError ? "Ошибка отправки заявки на регистрацию." : "Заявка успешно отправлена!"}
+        open={isDialogOpen}
+        handleClose={handleCloseDialog}
+      />
     </Container>
   )
 };

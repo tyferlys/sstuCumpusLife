@@ -9,6 +9,10 @@ const RegistrationContainer = () => {
   const {register, handleSubmit, formState: {errors}} = useForm<IRegistrationFormValues>(
     {mode: 'onBlur'}
   );
+  const [isDialogOpen, setIsDialogOpen] = React.useState<boolean>(false);
+  const [isDialogError, setDialogError] = React.useState<boolean>(false);
+
+  const handleCloseDialog = () => setIsDialogOpen(false);
   const onSubmit: SubmitHandler<IRegistrationFormValues> = async (data) => {
     const formData = new FormData()
     formData.append('middleName', data.middleName)
@@ -26,13 +30,25 @@ const RegistrationContainer = () => {
           'Content-Type': 'multipart/form-data',
         }
       })
-        .then((res) => console.log(res))
+        .then((res) => {
+          console.log(res)
+        })
     } catch (e) {
+      setDialogError(true);
       console.log(e)
+    } finally {
+      setIsDialogOpen(true)
     }
   }
   return (
-    <Registration register={register} errors={errors} handleSubmit={handleSubmit(onSubmit)}/>
+    <Registration
+      register={register}
+      errors={errors}
+      handleSubmit={handleSubmit(onSubmit)}
+      handleCloseDialog={handleCloseDialog}
+      isDialogOpen={isDialogOpen}
+      isDialogError={isDialogError}
+    />
   );
 };
 export default RegistrationContainer;
