@@ -1,5 +1,5 @@
 import { ExpandMore } from "@mui/icons-material";
-import {Avatar, Button, Card, CardActions, CardContent, CardHeader, CardMedia, Collapse, Grid, IconButton, Typography} from "@mui/material";
+import {Alert, Avatar, Button, Card, CardActions, CardContent, CardHeader, CardMedia, Collapse, Grid, IconButton, Typography} from "@mui/material";
 import {red} from "@mui/material/colors";
 import axios from "axios";
 import CardStd from "@/components/RegistrationPerson/card";
@@ -11,6 +11,19 @@ import {useRouter} from "next/router";
 const RegistrationPerson = (props: any) => {
 
     let key = 0;
+
+    const drawStd = () => {
+        if (props.listStudent != "заявок больше нет"){
+            return props.listStudent.map(student => {
+                return (
+                    <Grid item key = {key++} mb = {1}>
+                        <CardStd student = {student} deleteStudentRequest = {props.deleteStudentRequest} id={student.Id}/>
+                    </Grid>
+                )
+            })
+        }
+        else return <Grid item><Alert severity="error">Заявок больше нет!</Alert></Grid>
+    }
 
     return (
         <div>
@@ -29,13 +42,7 @@ const RegistrationPerson = (props: any) => {
                     <Grid item>
                         <Button><KeyboardArrowUpSharpIcon fontSize="large" onClick={() => {props.upDateListCard(0)}}/></Button>
                     </Grid>
-                    {props.listStudent.map(student => {
-                        return (
-                            <Grid item key = {key++} item mb = {3}>
-                                <CardStd student = {student} key = {key++} deleteStudentRequest = {props.deleteStudentRequest} id={key+1}/>
-                            </Grid>
-                        )
-                    })}
+                    {drawStd()}
                     <Grid item>
                         <Button><KeyboardArrowDownSharpIcon fontSize="large" onClick={() => {props.upDateListCard(1)}}/></Button>
                     </Grid>

@@ -10,7 +10,8 @@ const RegistrationPersonContainer = (props: any) => {
     const router = useRouter()
     const upDateListCard = async (nextPage: number) => {
         if (nextPage === 0){
-            router.push(`/registrationPerson/${Number(props.pageNow) - 1}`)
+            if (props.pageNow != 0)
+                router.push(`/registrationPerson/${Number(props.pageNow) - 1}`)
         }
         else if (nextPage === 1){
             router.push(`/registrationPerson/${Number(props.pageNow) + 1}`)
